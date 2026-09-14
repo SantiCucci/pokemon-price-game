@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Cuál carta vale más? - Pokémon TCG</title>
+  <link rel="icon" type="image/png" href="assets/pokeball.png">
+
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="container px-3 py-4 py-md-5">
+
+    <section class="screen-center" id="startScreen" aria-label="Inicio">
+
+      <header class="text-center mb-4" id="pageHeader">
+        <h1 class="fw-bold app-title">¿Cuál carta vale más?</h1>
+      </header>
+
+      <div class="text-center mb-4 d-flex flex-column align-items-center gap-2" id="startArea">
+        <button class="btn btn-primary btn-lg px-5" id="startBtn">Iniciar juego</button>
+        <button class="btn btn-outline-light" id="exploreBtn">Explorar cartas</button>
+        <button class="btn btn-outline-light" id="rulesBtn" data-bs-toggle="modal" data-bs-target="#rulesModal">
+          Reglas
+        </button>
+      </div>
+
+      <div class="text-center d-none" id="loadingArea">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="mt-2 text-muted">Buscando cartas...</p>
+      </div>
+
+    </section>
+
+    <section class="d-none" id="exploreScreen" aria-label="Explorar cartas">
+
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+        <h2 class="fw-bold app-title h4 mb-0">Explorar cartas</h2>
+        <button class="btn btn-sm btn-outline-light" id="exploreBackBtn">← Volver</button>
+      </div>
+
+      <form class="row g-2 mb-4" id="exploreFilters" role="search" aria-label="Filtrar cartas">
+        <div class="col-12 col-sm-7">
+          <label for="searchInput" class="form-label small text-muted mb-1">Buscar por nombre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="searchInput"
+            placeholder="Ej: Pikachu, Charizard..."
+            autocomplete="off"
+          >
+        </div>
+        <div class="col-12 col-sm-5">
+          <label for="typeFilter" class="form-label small text-muted mb-1">Filtrar por tipo</label>
+          <select class="form-select" id="typeFilter">
+            <option value="">Todos los tipos</option>
+          </select>
+        </div>
+      </form>
+
+      <div class="text-center d-none py-5" id="exploreLoading">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="mt-2 text-muted" id="exploreLoadingText">Buscando cartas...</p>
+      </div>
+
+      <div class="alert alert-danger d-none" id="exploreError" role="alert"></div>
+
+      <p class="text-center text-muted d-none py-4" id="exploreNoResults">
+        No se encontraron cartas con esos criterios de búsqueda.
+      </p>
+
+
+      <p class="text-muted small mb-2 d-none" id="exploreCount"></p>
+
+      <div class="row g-3" id="exploreResults"></div>
+
+    </section>
+
+    <div class="alert alert-danger d-none" id="errorArea" role="alert"></div>
+
+    <section class="d-none screen-center" id="playScreen" aria-label="Juego">
+
+      <div class="d-flex justify-content-center flex-wrap gap-3 mb-4" id="scoreboard">
+        <span class="badge text-bg-primary fs-6">Ronda: <span id="roundNumber">0</span>/<span id="totalRounds">10</span></span>
+        <span class="badge text-bg-secondary fs-6 d-flex align-items-center gap-2">Vidas: <span id="livesDisplay"></span></span>
+      </div>
+
+      <div id="gameArea">
+
+        <div class="row justify-content-center g-4">
+
+          <div class="col-12 col-md-5">
+            <div class="card card-select h-100 text-center shadow-sm" id="cardA" role="button" tabindex="0">
+              <img src="" alt="Carta A" class="card-img-top p-3" id="cardA-img">
+              <div class="card-body">
+                <h5 class="card-title" id="cardA-name">-</h5>
+                <p class="card-text text-muted small" id="cardA-set">-</p>
+                <p class="card-text fw-bold d-none" id="cardA-price"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-5">
+            <div class="card card-select h-100 text-center shadow-sm" id="cardB" role="button" tabindex="0">
+              <img src="" alt="Carta B" class="card-img-top p-3" id="cardB-img">
+              <div class="card-body">
+                <h5 class="card-title" id="cardB-name">-</h5>
+                <p class="card-text text-muted small" id="cardB-set">-</p>
+                <p class="card-text fw-bold d-none" id="cardB-price"></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="text-center d-none screen-center" id="endArea" aria-label="Fin del juego">
+      <div class="p-4 rounded-4" id="endCard">
+        <h2 class="fw-bold mb-2" id="endTitle">-</h2>
+        <p class="fs-5 mb-4" id="endMessage">-</p>
+        <button class="btn btn-primary btn-lg px-5" id="restartBtn">Reiniciar juego</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="container text-center text-muted small pb-4">
+    <p class="mb-0">Trabajo práctico — Plataformas de Desarrollo · Datos de <a href="https://pokemontcg.io" target="_blank" rel="noopener">pokemontcg.io</a></p>
+  </footer>
+
+  <div class="modal fade" id="rulesModal" tabindex="-1" aria-labelledby="rulesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="rulesModalLabel">Reglas del juego</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <ol class="mb-0 ps-3">
+            <li class="mb-2">Se muestran 2 cartas de Pokémon, cada una con un precio real de mercado.</li>
+            <li class="mb-2">Tocá la carta que creas que vale <strong>más</strong>.</li>
+            <li class="mb-2">Si acertás, la carta elegida se ilumina en verde y pasás a la siguiente ronda.</li>
+            <li class="mb-2">Si te equivocás, se ilumina en rojo y perdés una pokébola (vida).</li>
+            <li class="mb-2">Empezás con <strong>3 vidas</strong>. Al perder las 3, el juego termina.</li>
+            <li>Ganás si completás las <strong>10 rondas</strong> antes de quedarte sin vidas.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="script.js"></script>
+  <script src="explore.js"></script>
+</body>
+</html>

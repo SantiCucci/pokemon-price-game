@@ -1,0 +1,213 @@
+:root {
+  --gg-bg: #202124;
+  --gg-surface: #292a2d;
+  --gg-surface-alt: #303134;
+  --gg-text: #e8eaed;
+  --gg-text-muted: #9aa0a6;
+  --gg-blue: #8ab4f8;
+  --gg-green: #81c995;
+  --gg-red: #f28b82;
+}
+
+body {
+  background-color: var(--gg-bg);
+  color: var(--gg-text);
+}
+
+a {
+  color: var(--gg-blue);
+}
+
+.text-muted {
+  color: var(--gg-text-muted) !important;
+}
+
+#scoreboard .badge {
+  background-color: var(--gg-surface-alt) !important;
+  color: var(--gg-text) !important;
+  font-weight: 500;
+  padding: 0.55em 0.9em;
+}
+
+.btn-primary {
+  background-color: var(--gg-blue);
+  border-color: var(--gg-blue);
+  color: #202124;
+  font-weight: 600;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #aecbfa;
+  border-color: #aecbfa;
+  color: #202124;
+}
+
+.card-select {
+  background-color: var(--gg-surface);
+  color: var(--gg-text);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 3px solid #3c4043;
+  cursor: pointer;
+}
+
+.card-select:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(138, 180, 248, 0.6) !important;
+}
+
+.card-select:hover:not(.correct):not(.incorrect) {
+  transform: translateY(-4px);
+  box-shadow: 0 0 35px 6px rgba(255, 255, 255, 0.35) !important;
+}
+
+.card-select.correct {
+  border-color: var(--gg-green);
+  box-shadow: 0 0 40px 8px rgba(129, 201, 149, 0.55) !important;
+  cursor: default;
+}
+
+.card-select.incorrect {
+  border-color: var(--gg-red);
+  box-shadow: 0 0 40px 8px rgba(242, 139, 130, 0.55) !important;
+  cursor: default;
+}
+
+#cardA-img,
+#cardB-img {
+  height: 320px;
+  object-fit: contain;
+  background-color: var(--gg-surface-alt);
+}
+
+.alert-success {
+  background-color: rgba(129, 201, 149, 0.15);
+  color: var(--gg-green);
+  border-color: rgba(129, 201, 149, 0.35);
+}
+
+.alert-danger {
+  background-color: rgba(242, 139, 130, 0.15);
+  color: var(--gg-red);
+  border-color: rgba(242, 139, 130, 0.35);
+}
+
+#endCard {
+  background-color: var(--gg-surface);
+  border: 1px solid #3c4043;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#endTitle.win {
+  color: var(--gg-green);
+}
+
+#endTitle.lose {
+  color: var(--gg-red);
+}
+
+#livesDisplay {
+  letter-spacing: 2px;
+}
+
+
+#livesDisplay {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pokeball {
+  --pokeball-size: 22px;
+  display: inline-block;
+  width: var(--pokeball-size);
+  height: var(--pokeball-size);
+  background-image: url("assets/pokeball.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.pokeball.used {
+  filter: grayscale(1) brightness(0.6);
+  opacity: 0.45;
+}
+
+@media (max-width: 576px) {
+  .app-title {
+    font-size: 1.6rem;
+  }
+
+  #scoreboard .badge {
+    font-size: 0.8rem;
+    padding: 0.45em 0.7em;
+  }
+
+  #cardA-img,
+  #cardB-img {
+    height: 200px;
+  }
+
+  .card-select .card-title {
+    font-size: 1rem;
+  }
+
+  #endCard {
+    padding: 1.5rem !important;
+  }
+
+  .pokeball {
+    --pokeball-size: 16px;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 767px) {
+  #cardA-img,
+  #cardB-img {
+    height: 260px;
+  }
+}
+
+.screen-center {
+  min-height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.explore-card {
+  background-color: var(--gg-surface);
+  color: var(--gg-text);
+  border: 1px solid #3c4043;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.explore-card img {
+  height: 140px;
+  object-fit: contain;
+  background-color: var(--gg-surface-alt);
+}
+
+.explore-card .card-title {
+  font-size: 0.85rem;
+}
+
+#exploreFilters .form-control,
+#exploreFilters .form-select {
+  background-color: var(--gg-surface);
+  color: var(--gg-text);
+  border-color: #3c4043;
+}
+
+#exploreFilters .form-control:focus,
+#exploreFilters .form-select:focus {
+  background-color: var(--gg-surface);
+  color: var(--gg-text);
+  border-color: var(--gg-blue);
+  box-shadow: 0 0 0 0.2rem rgba(138, 180, 248, 0.25);
+}
